@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { createTodo, deleteTodo, toggleTodo, useTodos } from "../api";
 import styles from "../styles/Home.module.css";
 import { Todo } from "../types";
@@ -18,7 +18,7 @@ export const TodoList: React.FC = () => {
   return (
     <ul className={styles.todoList}>
       {todos.map(todo => (
-        <TodoItem todo={todo} />
+        <TodoItem todo={todo} key={todo.id} />
       ))}
     </ul>
   );
@@ -58,7 +58,7 @@ const AddTodoInput = () => {
     >
       <input
         className={styles.input}
-        placeholder="Buy some milk"
+        placeholder="Add Todo..."
         value={text}
         onChange={e => setText(e.target.value)}
       />
@@ -76,11 +76,8 @@ const Home: NextPage = () => {
       </Head>
 
       <header className={styles.header}>
-        <h1 className={styles.title}>Todos</h1>
-        <h2 className={styles.desc}>
-          NextJS app connected to Postgres using Prisma and hosted on{" "}
-          <a href="https://railway.app">Railway</a>
-        </h2>
+        <h1 className={styles.title}>TODO</h1>
+        <h2 className={styles.desc}>Todo List Example on Railway</h2>
       </header>
 
       <main className={styles.main}>
